@@ -11,6 +11,10 @@ import { ExaminationDisplay } from "./Examination";
 import { MedicineDisplay } from "./Medicine";
 import { MedicalHistoryDisplay } from "./MedicalHistory";
 import { PhysiotherapyDisplay } from "./Physiotherapy";
+import { CommonProblemsDisplay } from "./TestMultiSelect";
+import { InterventionsDisplay } from "./Interventions";
+import { MentalHealthDisplay } from "./MentalHealth";
+
 import Header from "./shared/Header";
 
 const EventList = (props) => {
@@ -95,6 +99,19 @@ const EventList = (props) => {
         eventTypeText = LocalizedStrings[language].physiotherapy
         display = PhysiotherapyDisplay(metadataObj, language)
         break
+      case EventTypes.CommonProblems:
+        eventTypeText = LocalizedStrings[language].commomProblems
+        display = CommonProblemsDisplay(metadataObj, language)
+        break
+      case EventTypes.Interventions:
+        eventTypeText = LocalizedStrings[language].interventions
+        display = InterventionsDisplay(metadataObj, language)
+        break
+      case EventTypes.MentalHealth:
+        eventTypeText = LocalizedStrings[language].mentalHealthFollowUp
+        display = MentalHealthDisplay(metadataObj, language)
+        break
+
       default:
         eventTypeText = item.event_type
         display = <Text>{metadataObj}</Text>

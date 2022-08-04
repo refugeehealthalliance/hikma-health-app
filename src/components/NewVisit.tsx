@@ -154,6 +154,26 @@ const NewVisit = (props) => {
       </View>
 
       <View style={styles.gridContainer}>
+        <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('CommonProblems', { patientId: patient.id, visitId, userName, language })}>
+          <View style={styles.actionIcon}>
+            <Image source={require('../images/stethoscope.png')} style={{ width: 43, height: 47 }} />
+          </View>
+          <Text style={styles.actionText}>{LocalizedStrings[language].commonProblems}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('Interventions', { patientId: patient.id, visitId, userName, language })}>
+          <View style={styles.actionIcon}>
+            <Image source={require('../images/complaint.png')} style={{ width: 77, height: 38 }} />
+          </View>
+          <Text style={styles.actionText}>{LocalizedStrings[language].interventions}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('MentalHealth', { patientId: patient.id, visitId, userName, language })}>
+          <View style={styles.actionIcon}>
+            <Image source={require('../images/doctor.png')} style={{ width: 40, height: 48 }} />
+          </View>
+          <Text style={styles.actionText}>{LocalizedStrings[language].mentalHealthFollowUp}</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.gridContainer}>
         <TouchableOpacity style={styles.actionButton} onPress={() => openTextEvent(EventTypes.DentalTreatment)}>
           <View style={styles.actionIcon}>
             <Image source={require('../images/dental_treatment.png')} style={{ width: 50, height: 50 }} />

@@ -24,6 +24,12 @@ import EditMedicalHistory from '../components/EditMedicalHistory';
 import EditPhysiotherapy from '../components/EditPhysiotherapy';
 import EditMedicine from '../components/EditMedicine';
 import SnapshotList from '../components/SnapshotList';
+import CommonProblems from '../components/TestMultiSelect';
+import EditCommonProblems from '../components/EditCommonProblems';
+import Interventions from '../components/Interventions';
+import EditInterventions from '../components/EditInterventions';
+import MentalHealth from '../components/MentalHealth';
+import EditMentalHealth from '../components/EditMentalHealth';
 
 const rootNavigator = createStackNavigator(
   {
@@ -157,6 +163,48 @@ const rootNavigator = createStackNavigator(
       screen: EditMedicine,
       navigationOptions: () => ({
         title: `EditMedicine`,
+        header: null
+      })
+    },
+    CommonProblems: {
+      screen: CommonProblems,
+      navigationOptions: () => ({
+        title: `CommonProblems`,
+        header: null
+      })
+    },
+    EditCommonProblems: {
+      screen: EditCommonProblems,
+      navigationOptions: () => ({
+        title: `EditCommonProblems`,
+        header: null
+      })
+    },
+    Interventions: {
+      screen: Interventions,
+      navigationOptions: () => ({
+        title: `Interventions`,
+        header: null
+      })
+    },
+    EditInterventions: {
+      screen: EditInterventions,
+      navigationOptions: () => ({
+        title: `EditInterventions`,
+        header: null
+      })
+    },
+    MentalHealth: {
+      screen: MentalHealth,
+      navigationOptions: () => ({
+        title: `MentalHealth`,
+        header: null
+      })
+    },
+    EditMentalHealth: {
+      screen: EditMentalHealth,
+      navigationOptions: () => ({
+        title: `EditMentalHealth`,
         header: null
       })
     },

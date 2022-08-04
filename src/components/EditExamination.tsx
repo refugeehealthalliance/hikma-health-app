@@ -14,24 +14,26 @@ const EditExamination = (props) => {
   const userName = props.navigation.getParam('userName');
   const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
   
-  const [examination, setExamination] = useState(null);
-  const [generalObservations, setGeneralObservations] = useState(null);
-  const [diagnosis, setDiagnosis] = useState(null);
-  const [treatment, setTreatment] = useState(null);
-  const [covid19, setCovid19] = useState(null);
-  const [referral, setReferral] = useState(null);
-  const [referralText, setReferralText] = useState(null);
+  const [traumaPhysical, setTraumaPhysical] = useState(null);
+  const [traumaSexual, setTraumaSexual] = useState(null);
+  const [traumaAbuse, setTraumaAbuse] = useState(null);
+  const [traumaKilling, setTraumaKilling] = useState(null);
+  const [traumaPSeperation, setTraumaPSeperation] = useState(null);
+  const [traumaThreats, setTraumaThreats] = useState(null);
+  const [traumaTJ, setTraumaTJ] = useState(null);
+  const [traumaOthers, setTraumaOthers] = useState(null);
 
   useEffect(() => {
     if (!!event.event_metadata) {
       const metadataObj = JSON.parse(event.event_metadata)
-      setExamination(metadataObj.examination)
-      setGeneralObservations(metadataObj.generalObservations)
-      setDiagnosis(metadataObj.diagnosis)
-      setTreatment(metadataObj.treatment)
-      setCovid19(metadataObj.covid19)
-      setReferral(metadataObj.referral)
-      setReferralText(metadataObj.referralText)
+      setTraumaPhysical(metadataObj.traumaPhysical)
+      setTraumaSexual(metadataObj.traumaSexual)
+      setTraumaAbuse(metadataObj.traumaAbuse)
+      setTraumaKilling(metadataObj.traumaKilling)
+      setTraumaPSeperation(metadataObj.traumaPSeperation)
+      setTraumaThreats(metadataObj.traumaThreats)
+      setTraumaTJ(metadataObj.traumaTJ)
+      setTraumaOthers(metadataObj.traumaOthers)
     }
   }, [props])
 
@@ -40,13 +42,14 @@ const EditExamination = (props) => {
       event.id,
       JSON.stringify({
         doctor: userName,
-        examination,
-        generalObservations,
-        diagnosis,
-        treatment,
-        covid19,
-        referral,
-        referralText,
+        traumaPhysical,
+        traumaSexual,
+        traumaAbuse,
+        traumaKilling,
+        traumaPSeperation,
+        traumaThreats,
+        traumaTJ,
+        traumaOthers
       })
     ).then((response) => props.navigation.navigate('EventList', { events: response, language }))
   };
@@ -59,62 +62,41 @@ const EditExamination = (props) => {
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch', }}>
           <Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].examination}</Text>
         </View>
-        <View style={[styles.responseRow, { paddingBottom: 0 }]}>
-          <Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].examination}</Text>
-        </View>
-        <View style={[styles.responseRow, { padding: 0 }]}>
-          <TextInput
-            style={styles.inputs}
-            onChangeText={(text) => setExamination(text)}
-            value={examination}
-          />
-        </View>
-        <View style={[styles.responseRow, { paddingVertical: 0 }]}>
-          <Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].generalObservations}</Text>
-        </View>
-        <View style={[styles.responseRow, { padding: 0 }]}>
-          <TextInput
-            style={styles.inputs}
-            onChangeText={(text) => setGeneralObservations(text)}
-            value={generalObservations}
-          />
-        </View>
-        <View style={[styles.responseRow, { paddingVertical: 0 }]}>
-          <Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].diagnosis}</Text>
-        </View>
-        <View style={[styles.responseRow, { padding: 0 }]}>
-          <TextInput
-            style={styles.inputs}
-            onChangeText={(text) => setDiagnosis(text)}
-            value={diagnosis}
-          />
-        </View>
-        <View style={[styles.responseRow, { paddingVertical: 0 }]}>
-          <Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].treatment}</Text>
-        </View>
-        <View style={[styles.responseRow, { padding: 0 }]}>
-          <TextInput
-            style={styles.inputs}
-            onChangeText={(text) => setTreatment(text)}
-            value={treatment}
-          />
+        <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{LocalizedStrings[language].traumaType}:</Text>
+        <Text>{LocalizedStrings[language].traumaDesc}</Text>
+        <View style={styles.responseRow}>
+          {radioButtons({ field: traumaPhysical, action: setTraumaPhysical, prompt: LocalizedStrings[language].traumaPhysical, language })}
         </View>
         <View style={styles.responseRow}>
-          {radioButtons({ field: covid19, action: setCovid19, prompt: LocalizedStrings[language].covid19, language })}
+          {radioButtons({ field: traumaSexual, action: setTraumaSexual, prompt: LocalizedStrings[language].traumaSexual, language })}
         </View>
         <View style={styles.responseRow}>
-          {radioButtons({ field: referral, action: setReferral, prompt: LocalizedStrings[language].referral, language })}
+          {radioButtons({ field: traumaAbuse, action: setTraumaAbuse, prompt: LocalizedStrings[language].traumaAbuse, language })}
         </View>
-        {!!referral ?
-          <View style={[styles.responseRow, { paddingTop: 0, paddingHorizontal: 0 }]}>
-            <TextInput
-              style={styles.inputs}
-              onChangeText={(text) => setReferralText(text)}
-              value={referralText}
-            />
-          </View> :
-          null
-        }
+        <View style={styles.responseRow}>
+          {radioButtons({ field: traumaKilling, action: setTraumaKilling, prompt: LocalizedStrings[language].traumaKilling, language })}
+        </View>
+        <View style={styles.responseRow}>
+          {radioButtons({ field: traumaPSeperation, action: setTraumaPSeperation, prompt: LocalizedStrings[language].traumaPSeperation, language })}
+        </View>
+        <View style={styles.responseRow}>
+          {radioButtons({ field: traumaThreats, action: setTraumaThreats, prompt: LocalizedStrings[language].traumaThreats, language })}
+        </View>
+        <View style={styles.responseRow}>
+          {radioButtons({ field: traumaTJ, action: setTraumaTJ, prompt: LocalizedStrings[language].traumaTJ, language })}
+        </View>
+        <View style={styles.responseRow}>
+        </View>
+        <View style={[styles.responseRow, { paddingVertical: 0 }]}>
+          <Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].traumaOthers}</Text>
+        </View>
+        <View style={[styles.responseRow, { padding: 0 }]}>
+          <TextInput
+            style={styles.inputs}
+            onChangeText={(text) => setTraumaOthers(text)}
+            value={traumaOthers}
+          />
+        </View>
         <View style={{ alignItems: 'center' }}>
           <Button
             title={LocalizedStrings[language].save}

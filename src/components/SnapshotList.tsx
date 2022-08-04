@@ -7,6 +7,9 @@ import { EventTypes } from "../enums/EventTypes";
 import { MedicineDisplay } from "./Medicine";
 import { MedicalHistoryDisplay } from "./MedicalHistory";
 import { ExaminationDisplay } from "./Examination";
+import { MentalHealthDisplay } from "./MentalHealth";
+import { InterventionsDisplay } from "./Interventions";
+import { CommonProblemsDisplay } from "./TestMultiSelect";
 import Header from "./shared/Header";
 
 const SnapshotList = (props) => {
@@ -57,6 +60,18 @@ const SnapshotList = (props) => {
       case EventTypes.Complaint:
         eventTypeText = LocalizedStrings[language].complaint
         display = <Text>{metadataObj}</Text>
+        break
+      case EventTypes.CommonProblems:
+        eventTypeText = LocalizedStrings[language].medicine
+        display = CommonProblemsDisplay(metadataObj, language)
+        break
+      case EventTypes.Interventions:
+        eventTypeText = LocalizedStrings[language].medicine
+        display = InterventionsDisplay(metadataObj, language)
+        break
+      case EventTypes.MentalHealth:
+        eventTypeText = LocalizedStrings[language].medicine
+        display = MentalHealthDisplay(metadataObj, language)
         break
       default:
         eventTypeText = item.event_type
