@@ -9,7 +9,7 @@ import { MedicalHistoryDisplay } from "./MedicalHistory";
 import { ExaminationDisplay } from "./Examination";
 import { MentalHealthDisplay } from "./MentalHealth";
 import { InterventionsDisplay } from "./Interventions";
-import { CommonProblemsDisplay } from "./TestMultiSelect";
+import { CommonProblemsDisplay } from "./CommonProblems";
 import Header from "./shared/Header";
 
 const SnapshotList = (props) => {

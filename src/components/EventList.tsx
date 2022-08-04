@@ -11,7 +11,7 @@ import { ExaminationDisplay } from "./Examination";
 import { MedicineDisplay } from "./Medicine";
 import { MedicalHistoryDisplay } from "./MedicalHistory";
 import { PhysiotherapyDisplay } from "./Physiotherapy";
-import { CommonProblemsDisplay } from "./TestMultiSelect";
+import { CommonProblemsDisplay } from "./CommonProblems";
 import { InterventionsDisplay } from "./Interventions";
 import { MentalHealthDisplay } from "./MentalHealth";
 

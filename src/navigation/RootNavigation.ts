@@ -24,7 +24,7 @@ import EditMedicalHistory from '../components/EditMedicalHistory';
 import EditPhysiotherapy from '../components/EditPhysiotherapy';
 import EditMedicine from '../components/EditMedicine';
 import SnapshotList from '../components/SnapshotList';
-import CommonProblems from '../components/TestMultiSelect';
+import CommonProblems from '../components/CommonProblems';
 import EditCommonProblems from '../components/EditCommonProblems';
 import Interventions from '../components/Interventions';
 import EditInterventions from '../components/EditInterventions';

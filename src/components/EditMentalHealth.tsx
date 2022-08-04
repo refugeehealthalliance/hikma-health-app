@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {
-  View, Text, TextInput, ScrollView, Button, TouchableOpacitym Picker
+  View, Text, TextInput, ScrollView, Button, Picker
 } from 'react-native';
 
 import { database } from "../storage/Database";
