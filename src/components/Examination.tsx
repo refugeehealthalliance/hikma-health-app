@@ -73,7 +73,7 @@ const Examination = (props) => {
           <Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].examination}</Text>
         </View>
         <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{LocalizedStrings[language].traumaType}:</Text>
-        <Text>{LocalizedStrings[language].traumaDesc}</Text>
+        <Text style={[styles.text]}>{LocalizedStrings[language].traumaDesc}</Text>
         <View style={styles.responseRow}>
           {radioButtons({ field: traumaPhysical, action: setTraumaPhysical, prompt: LocalizedStrings[language].traumaPhysical, language })}
         </View>

@@ -55,15 +55,14 @@ const EditExamination = (props) => {
   };
 
   return (
-    <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+    <ScrollView contentContainerStyle={{ flex: 1 }}>
       <View style={styles.containerLeft}>
-        {Header({action: () => props.navigation.navigate('EventList', { language}), language, setLanguage})}
-
+        {Header({ action: () => props.navigation.navigate('NewVisit', { language }), language, setLanguage })}
         <View style={{ flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch', }}>
           <Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].examination}</Text>
         </View>
         <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{LocalizedStrings[language].traumaType}:</Text>
-        <Text>{LocalizedStrings[language].traumaDesc}</Text>
+        <Text style={[styles.text]}>{LocalizedStrings[language].traumaDesc}</Text>
         <View style={styles.responseRow}>
           {radioButtons({ field: traumaPhysical, action: setTraumaPhysical, prompt: LocalizedStrings[language].traumaPhysical, language })}
         </View>
@@ -84,8 +83,6 @@ const EditExamination = (props) => {
         </View>
         <View style={styles.responseRow}>
           {radioButtons({ field: traumaTJ, action: setTraumaTJ, prompt: LocalizedStrings[language].traumaTJ, language })}
-        </View>
-        <View style={styles.responseRow}>
         </View>
         <View style={[styles.responseRow, { paddingVertical: 0 }]}>
           <Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].traumaOthers}</Text>

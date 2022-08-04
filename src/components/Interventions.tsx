@@ -63,8 +63,8 @@ const Interventions = (props) => {
     const [interpersonalCommunication, setInterpersonalCommunication] = useState(null);
     const [prayer, setPrayer] = useState(null);
     const [supportivePeople, setSupportivePeople] = useState(null);
-    const [otherStrategies, setOtherStrategies] = useState('');
-    const [psychiatricMedications, setPsychiatricMedications] = useState('');
+    const [otherStrategies, setOtherStrategies] = useState(null);
+    const [psychiatricMedications, setPsychiatricMedications] = useState(null);
   
     const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
     const patientId = props.navigation.getParam('patientId');

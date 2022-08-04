@@ -120,8 +120,8 @@ const CommonProblems = (props) => {
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch', }}>
             <Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].commonProblems}</Text>
           </View>
-          <Text>{LocalizedStrings[language].commomProblemsDesc}</Text>
-          <Text>{LocalizedStrings[language].commonProblemsHint}</Text>
+          <Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].commomProblemsDesc}</Text>
+          <Text style={[styles.text]}>{LocalizedStrings[language].commonProblemsHint}</Text>
           <View style={styles.responseRow}>
             {radioButtons({ field: difficultyEating, action: setDifficultyEating, prompt: LocalizedStrings[language].difficultyEating, language })}
           </View>

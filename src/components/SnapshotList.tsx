@@ -62,15 +62,15 @@ const SnapshotList = (props) => {
         display = <Text>{metadataObj}</Text>
         break
       case EventTypes.CommonProblems:
-        eventTypeText = LocalizedStrings[language].medicine
+        eventTypeText = LocalizedStrings[language].commonProblems
         display = CommonProblemsDisplay(metadataObj, language)
         break
       case EventTypes.Interventions:
-        eventTypeText = LocalizedStrings[language].medicine
+        eventTypeText = LocalizedStrings[language].interventions
         display = InterventionsDisplay(metadataObj, language)
         break
       case EventTypes.MentalHealth:
-        eventTypeText = LocalizedStrings[language].medicine
+        eventTypeText = LocalizedStrings[language].mentalHealthFollowUp
         display = MentalHealthDisplay(metadataObj, language)
         break
       default:

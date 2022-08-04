@@ -290,13 +290,19 @@ const EditMentalHealth = (props) => {
 					onDateChange={(date) => setLastFollowUpDate(date)}
 				/>
 			</View>
-			<Text>{LocalizedStrings[language].firstSectionHint}</Text>
-			<Text>{LocalizedStrings[language].firstSectionQuestion}</Text>
+			<Text style={[styles.text]}>{LocalizedStrings[language].firstSectionHint}</Text>
+			<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].firstSectionQuestion}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].feelingNervous}</Text>
 			{RepeatingPicker(feelingNervous, setFeelingNervous, language)}
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].noControlWorrying}</Text>
 			{RepeatingPicker(noControlWorrying, setNoControlWorrying, language)}
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].littleInterest}</Text>
 			{RepeatingPicker(littleInterest, setLittleInterest, language)}
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].feelingDown}</Text>
 			{RepeatingPicker(feelingDown, setFeelingDown, language)}
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].cantSleep}</Text>
 			{RepeatingPicker(cantSleep, setCantSleep, language)}
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].dontFeelSafeLiving}</Text>
 			{RepeatingPicker(dontFeelSafeLiving, setDontFeelSafeLiving, language)}
 			<View style={[styles.responseRow, { padding: 0 }]}>
 				<TextInput
@@ -306,37 +312,37 @@ const EditMentalHealth = (props) => {
 					value={firstSectionScore}
 				/>
 			</View>
-			<Text>{LocalizedStrings[language].secondSectionQuestion}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].secondSectionQuestion}</Text>
 			{feelingPicker(howYouFeel, setHowYouFeel, language)}
-			<Text>{LocalizedStrings[language].thirdSectionHint}</Text>
-			<Text>{LocalizedStrings[language].thridSectionQuestion}</Text>
-			<Text>{LocalizedStrings[language].childBodyFeeling}</Text>
+			<Text style={[styles.text]}>{LocalizedStrings[language].thirdSectionHint}</Text>
+			<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].thridSectionQuestion}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].childBodyFeeling}</Text>
 			{FrequentPicker(childBodyFeeling, setChildBodyFeeling, language)}
-			<Text>{LocalizedStrings[language].childAwayFromPeople}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].childAwayFromPeople}</Text>
 			{FrequentPicker(childAwayFromPeople, setClildAwayFromPeople, language)}
-			<Text>{LocalizedStrings[language].childFeelingHappy}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].childFeelingHappy}</Text>
 			{FrequentPicker(childFeelingHappy, setChildFeelingHappy, language)}
-			<Text>{LocalizedStrings[language].childTroubleSleeping}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].childTroubleSleeping}</Text>
 			{FrequentPicker(childTroubleSleeping, setChildTroubleSleeping, language)}
-			<Text>{LocalizedStrings[language].childHardPayAttention}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].childHardPayAttention}</Text>
 			{FrequentPicker(childHardPayAttention, setChildHardPayAttention, language)}
-			<Text>{LocalizedStrings[language].childFeelsAlone}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].childFeelsAlone}</Text>
 			{FrequentPicker(childFeelsAlone, setChildFeelsAlone, language)}
-			<Text>{LocalizedStrings[language].forthSectionHint}</Text>
-			<Text>{LocalizedStrings[language].forthSectionQuestion}</Text>
-			<Text>{LocalizedStrings[language].bodyFeelings}</Text>
+			<Text style={[styles.text]}>{LocalizedStrings[language].forthSectionHint}</Text>
+			<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].forthSectionQuestion}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].bodyFeelings}</Text>
 			{FrequentPicker(bodyFeelings, setBodyFeelings, language)}
-			<Text>{LocalizedStrings[language].awayFromPeople}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].awayFromPeople}</Text>
 			{FrequentPicker(awayFromPeople, setAwayFromPeople, language)}
-			<Text>{LocalizedStrings[language].feelingHappy}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].feelingHappy}</Text>
 			{FrequentPicker(feelingHappy, setFeelingHappy, language)}
-			<Text>{LocalizedStrings[language].troubleSleeping}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].troubleSleeping}</Text>
 			{FrequentPicker(troubleSleeping, setTroubleSleeping, language)}
-			<Text>{LocalizedStrings[language].hardPayAttention}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].hardPayAttention}</Text>
 			{FrequentPicker(hardPayAttention, setHardPayAttention, language)}
-			<Text>{LocalizedStrings[language].feelAlone}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].feelAlone}</Text>
 			{FrequentPicker(feelAlone, setFeelAlone, language)}
-			<Text>{LocalizedStrings[language].pastWeekStress}</Text>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].pastWeekStress}</Text>
 			{StressRange(pastWeekStress, setPastWeekStress, language)}
 			<View style={{ alignItems: 'center' }}>
 				<Button
