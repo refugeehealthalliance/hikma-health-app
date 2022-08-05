@@ -131,6 +131,9 @@ const CommonProblems = (props) => {
           <View style={styles.responseRow}>
             {radioButtons({ field: difficultySleeping, action: setDifficultySleeping, prompt: LocalizedStrings[language].difficultySleeping, language })}
           </View>
+          <View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].hoursSlept}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
 						<TextInput
 								style={styles.inputs}
@@ -158,6 +161,9 @@ const CommonProblems = (props) => {
 					<View style={styles.responseRow}>
             {radioButtons({ field: bodyAches, action: setBodyAches, prompt: LocalizedStrings[language].bodyAches, language })}
           </View>
+          <View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].bodyAchesWhere}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -190,6 +196,9 @@ const CommonProblems = (props) => {
 					<View style={styles.responseRow}>
             {radioButtons({ field: hallucinations, action: setHallucinations, prompt: LocalizedStrings[language].hallucinations, language })}
           </View>
+          <View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].potentialDiagnosis}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -198,6 +207,9 @@ const CommonProblems = (props) => {
               value={potentialDiagnosis}
             />
           </View>
+          <View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].otherSymptom}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -206,7 +218,7 @@ const CommonProblems = (props) => {
               value={otherSymptom}
             />
           </View>
-					<Text style={{ fontSize: 16, fontWeight: 'bold' }}>{LocalizedStrings[language].childrenSpecific}:</Text>
+					<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].childrenSpecific}:</Text>
 					<View style={styles.responseRow}>
             {radioButtons({ field: bedWetting, action: setBedWetting, prompt: LocalizedStrings[language].bedWetting, language })}
           </View>
@@ -216,6 +228,9 @@ const CommonProblems = (props) => {
 					<View style={styles.responseRow}>
             {radioButtons({ field: separationAnxiety, action: setSeparationAnxiety, prompt: LocalizedStrings[language].separationAnxiety, language })}
           </View>
+          <View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].communicationDifficulties}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}

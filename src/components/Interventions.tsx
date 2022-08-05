@@ -118,6 +118,9 @@ const Interventions = (props) => {
           <View style={styles.responseRow}>
             {radioButtons({ field: resourceConnection, action: setResourceConnection, prompt: LocalizedStrings[language].resourceConnection, language })}
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].resourceConnectionSpecify}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -181,6 +184,9 @@ const Interventions = (props) => {
             {radioButtons({ field: prayer, action: setPrayer, prompt: LocalizedStrings[language].prayer, language })}
           </View>
 					<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].notes}</Text>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].supportivePeople}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -189,6 +195,9 @@ const Interventions = (props) => {
               value={supportivePeople}
             />
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].otherStrategies}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -197,6 +206,9 @@ const Interventions = (props) => {
               value={otherStrategies}
             />
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].psychiatricMedications}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}

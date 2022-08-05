@@ -96,7 +96,6 @@ export const MentalHealthDisplay = (metadataObj, language) => {
 			<Text>{LocalizedStrings[language].feelingDown}: {metadataObj.feelingDown}</Text>
 			<Text>{LocalizedStrings[language].cantSleep}: {metadataObj.cantSleep}</Text>
 			<Text>{LocalizedStrings[language].dontFeelSafeLiving}: {metadataObj.dontFeelSafeLiving}</Text>
-			<Text>{LocalizedStrings[language].firstSectionScore}: {parseInt(metadataObj.feelingNervous) + parseInt(metadataObj.noControlWorrying) + parseInt(metadataObj.littleInterest) + parseInt(metadataObj.feelingDown) + parseInt(metadataObj.cantSleep) }</Text>
 			<Text>{LocalizedStrings[language].secondSectionQuestion}: {metadataObj.howYouFeel}</Text>
 			<Text>{LocalizedStrings[language].thirdSectionQuestion}:</Text>
 			<Text>{LocalizedStrings[language].childBodyFeeling}: {metadataObj.childBodyFeeling}</Text>
@@ -136,7 +135,6 @@ const MentalHealth = (props) => {
     const [feelingDown, setFeelingDown] = useState(null);
     const [cantSleep, setCantSleep] = useState(null);
     const [dontFeelSafeLiving, setDontFeelSafeLiving] = useState(null);
-    const [firstSectionScore, setFirstSectionScore] = useState(null);
 		const [howYouFeel, setHowYouFeel] = useState(null);
 		const [childBodyFeeling, setChildBodyFeeling] = useState(null);
 		const [childAwayFromPeople, setClildAwayFromPeople] = useState(null);
@@ -186,7 +184,6 @@ const MentalHealth = (props) => {
           feelingDown,
           cantSleep,
           dontFeelSafeLiving,
-          firstSectionScore,
 					howYouFeel,
 					childBodyFeeling,
 					childAwayFromPeople,
@@ -217,6 +214,9 @@ const MentalHealth = (props) => {
           <View style={styles.responseRow}>
             {radioButtons({ field: inPerson, action: setInPerson, prompt: LocalizedStrings[language].inPerson, language })}
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].tele}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -231,6 +231,9 @@ const MentalHealth = (props) => {
           <View style={styles.responseRow}>
             {radioButtons({ field: goClinic, action: setGoClinic, prompt: LocalizedStrings[language].goClinic, language })}
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].mentalOther}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -239,6 +242,9 @@ const MentalHealth = (props) => {
               value={mentalOther}
             />
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].acupuncture}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -247,6 +253,9 @@ const MentalHealth = (props) => {
               value={acupuncture}
             />
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].sendAudio}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -255,6 +264,9 @@ const MentalHealth = (props) => {
               value={sendAudio}
             />
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].psychiatry}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -263,6 +275,9 @@ const MentalHealth = (props) => {
               value={psychiatry}
             />
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].refill}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -274,6 +289,9 @@ const MentalHealth = (props) => {
 					<View style={styles.responseRow}>
             {radioButtons({ field: takingRegularly, action: setTakingRegularly, prompt: LocalizedStrings[language].takingRegularly, language })}
           </View>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].concernsFollowup}</Text>
+					</View>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
@@ -282,27 +300,17 @@ const MentalHealth = (props) => {
               value={concernsFollowup}
             />
           </View>
-					<View style={styles.inputRow}>
-						<DatePicker
-							style={styles.datePicker}
-							date={lastFollowUpDate}
-							mode="date"
-							placeholder={LocalizedStrings[language].lastFollowUpDate}
-							format="YYYY-MM-DD"
-							minDate="2000-05-01"
-							maxDate={today.toISOString().split('T')[0]}
-							confirmBtnText={LocalizedStrings[language].confirm}
-							cancelBtnText={LocalizedStrings[language].cancel}
-							customStyles={{
-								dateInput: {
-									alignItems: 'flex-start',
-									borderWidth: 0
-								}
-							}}
-							androidMode='spinner'
-							onDateChange={(date) => setLastFollowUpDate(date)}
-						/>
+					<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+						<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].lastFollowUpDate}</Text>
 					</View>
+					<View style={[styles.responseRow, { padding: 0 }]}>
+            <TextInput
+              style={styles.inputs}
+							placeholder={LocalizedStrings[language].lastFollowUpDate}
+              onChangeText={(text) => setLastFollowUpDate(text)}
+              value={lastFollowUpDate}
+            />
+          </View>
 					<Text style={[styles.text]}>{LocalizedStrings[language].firstSectionHint}</Text>
 					<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].firstSectionQuestion}</Text>
 					<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].feelingNervous}</Text>
@@ -317,14 +325,6 @@ const MentalHealth = (props) => {
 					{RepeatingPicker(cantSleep, setCantSleep, language)}
 					<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].dontFeelSafeLiving}</Text>
 					{RepeatingPicker(dontFeelSafeLiving, setDontFeelSafeLiving, language)}
-					<View style={[styles.responseRow, { padding: 0 }]}>
-            <TextInput
-              style={styles.inputs}
-							placeholder={LocalizedStrings[language].firstSectionScore}
-              onChangeText={(score = parseInt(feelingNervous) + parseInt(noControlWorrying) + parseInt(littleInterest) + parseInt(feelingDown) + parseInt(cantSleep)) => setFirstSectionScore(score)}
-              value={firstSectionScore}
-            />
-          </View>
 					<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].secondSectionQuestion}</Text>
 					{feelingPicker(howYouFeel, setHowYouFeel, language)}
 					<Text style={[styles.text]}>{LocalizedStrings[language].thirdSectionHint}</Text>

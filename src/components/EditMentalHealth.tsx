@@ -96,7 +96,6 @@ const EditMentalHealth = (props) => {
 	const [feelingDown, setFeelingDown] = useState(null);
 	const [cantSleep, setCantSleep] = useState(null);
 	const [dontFeelSafeLiving, setDontFeelSafeLiving] = useState(null);
-	const [firstSectionScore, setFirstSectionScore] = useState(null);
 	const [howYouFeel, setHowYouFeel] = useState(null);
 	const [childBodyFeeling, setChildBodyFeeling] = useState(null);
 	const [childAwayFromPeople, setClildAwayFromPeople] = useState(null);
@@ -133,7 +132,6 @@ const EditMentalHealth = (props) => {
       setFeelingDown(metadataObj.feelingDown)
       setCantSleep(metadataObj.cantSleep)
       setDontFeelSafeLiving(metadataObj.dontFeelSafeLiving)
-      setFirstSectionScore(metadataObj.firstSectionScore)
       setHowYouFeel(metadataObj.howYouFeel)
       setChildBodyFeeling(metadataObj.childBodyFeeling)
       setClildAwayFromPeople(metadataObj.childAwayFromPeople)
@@ -175,7 +173,6 @@ const EditMentalHealth = (props) => {
 				feelingDown,
 				cantSleep,
 				dontFeelSafeLiving,
-				firstSectionScore,
 				howYouFeel,
 				childBodyFeeling,
 				childAwayFromPeople,
@@ -204,6 +201,9 @@ const EditMentalHealth = (props) => {
 			<View style={styles.responseRow}>
 				{radioButtons({ field: inPerson, action: setInPerson, prompt: LocalizedStrings[language].inPerson, language })}
 			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].tele}</Text>
+			</View>
 			<View style={[styles.responseRow, { padding: 0 }]}>
 				<TextInput
 					style={styles.inputs}
@@ -218,6 +218,9 @@ const EditMentalHealth = (props) => {
 			<View style={styles.responseRow}>
 				{radioButtons({ field: goClinic, action: setGoClinic, prompt: LocalizedStrings[language].goClinic, language })}
 			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].mentalOther}</Text>
+			</View>
 			<View style={[styles.responseRow, { padding: 0 }]}>
 				<TextInput
 					style={styles.inputs}
@@ -225,6 +228,9 @@ const EditMentalHealth = (props) => {
 					onChangeText={(text) => setMentalOther(text)}
 					value={mentalOther}
 				/>
+			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].acupuncture}</Text>
 			</View>
 			<View style={[styles.responseRow, { padding: 0 }]}>
 				<TextInput
@@ -234,6 +240,9 @@ const EditMentalHealth = (props) => {
 					value={acupuncture}
 				/>
 			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].sendAudio}</Text>
+			</View>
 			<View style={[styles.responseRow, { padding: 0 }]}>
 				<TextInput
 					style={styles.inputs}
@@ -242,6 +251,9 @@ const EditMentalHealth = (props) => {
 					value={sendAudio}
 				/>
 			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].psychiatry}</Text>
+			</View>
 			<View style={[styles.responseRow, { padding: 0 }]}>
 				<TextInput
 					style={styles.inputs}
@@ -249,6 +261,9 @@ const EditMentalHealth = (props) => {
 					onChangeText={(text) => setPsychiatry(text)}
 					value={psychiatry}
 				/>
+			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].refill}</Text>
 			</View>
 			<View style={[styles.responseRow, { padding: 0 }]}>
 				<TextInput
@@ -261,6 +276,9 @@ const EditMentalHealth = (props) => {
 			<View style={styles.responseRow}>
 				{radioButtons({ field: takingRegularly, action: setTakingRegularly, prompt: LocalizedStrings[language].takingRegularly, language })}
 			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].concernsFollowup}</Text>
+			</View>
 			<View style={[styles.responseRow, { padding: 0 }]}>
 				<TextInput
 					style={styles.inputs}
@@ -269,25 +287,15 @@ const EditMentalHealth = (props) => {
 					value={concernsFollowup}
 				/>
 			</View>
-			<View style={styles.inputRow}>
-				<DatePicker
-					style={styles.datePicker}
-					date={lastFollowUpDate}
-					mode="date"
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].lastFollowUpDate}</Text>
+			</View>
+			<View style={[styles.responseRow, { padding: 0 }]}>
+				<TextInput
+					style={styles.inputs}
 					placeholder={LocalizedStrings[language].lastFollowUpDate}
-					format="YYYY-MM-DD"
-					minDate="2000-05-01"
-					maxDate={today.toISOString().split('T')[0]}
-					confirmBtnText={LocalizedStrings[language].confirm}
-					cancelBtnText={LocalizedStrings[language].cancel}
-					customStyles={{
-						dateInput: {
-							alignItems: 'flex-start',
-							borderWidth: 0
-						}
-					}}
-					androidMode='spinner'
-					onDateChange={(date) => setLastFollowUpDate(date)}
+					onChangeText={(text) => setLastFollowUpDate(text)}
+					value={lastFollowUpDate}
 				/>
 			</View>
 			<Text style={[styles.text]}>{LocalizedStrings[language].firstSectionHint}</Text>
@@ -304,14 +312,6 @@ const EditMentalHealth = (props) => {
 			{RepeatingPicker(cantSleep, setCantSleep, language)}
 			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].dontFeelSafeLiving}</Text>
 			{RepeatingPicker(dontFeelSafeLiving, setDontFeelSafeLiving, language)}
-			<View style={[styles.responseRow, { padding: 0 }]}>
-				<TextInput
-					style={styles.inputs}
-					placeholder={LocalizedStrings[language].firstSectionScore}
-					onChangeText={(score = parseInt(feelingNervous) + parseInt(noControlWorrying) + parseInt(littleInterest) + parseInt(feelingDown) + parseInt(cantSleep)) => setFirstSectionScore(score)}
-					value={firstSectionScore}
-				/>
-			</View>
 			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].secondSectionQuestion}</Text>
 			{feelingPicker(howYouFeel, setHowYouFeel, language)}
 			<Text style={[styles.text]}>{LocalizedStrings[language].thirdSectionHint}</Text>

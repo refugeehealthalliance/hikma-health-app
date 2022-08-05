@@ -106,124 +106,139 @@ const EditCommonProblems = (props) => {
   };
 
   return (
-	<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-	<View style={styles.containerLeft}>
-	  {Header({ action: () => props.navigation.navigate('NewVisit', { language }), language, setLanguage })}
-	  <View style={{ flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch', }}>
-		<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].commonProblems}</Text>
-	  </View>
-	  <Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].commomProblemsDesc}</Text>
-	  <Text style={[styles.text]}>{LocalizedStrings[language].commonProblemsHint}</Text>
-	  <View style={styles.responseRow}>
-		{radioButtons({ field: difficultyEating, action: setDifficultyEating, prompt: LocalizedStrings[language].difficultyEating, language })}
-	  </View>
-	  <View style={styles.responseRow}>
-		{radioButtons({ field: suicidalIdeation, action: setSuicidalIdeation, prompt: LocalizedStrings[language].suicidalIdeation, language })}
-	  </View>
-	  <View style={styles.responseRow}>
-		{radioButtons({ field: difficultySleeping, action: setDifficultySleeping, prompt: LocalizedStrings[language].difficultySleeping, language })}
-	  </View>
-				<View style={[styles.responseRow, { padding: 0 }]}>
-					<TextInput
-							style={styles.inputs}
-							placeholder={LocalizedStrings[language].hoursSlept}
-							onChangeText={(text) => setHoursSlept(text)}
-							value={hoursSlept}
-							keyboardType='numeric'
-					/>
-				</View>
-	  <View style={styles.responseRow}>
-		{radioButtons({ field: sleepingNight, action: setSleepingNight, prompt: LocalizedStrings[language].sleepingNight, language })}
-	  </View>
-	  <View style={styles.responseRow}>
-		{radioButtons({ field: sleepingFalling, action: setSleepingFalling, prompt: LocalizedStrings[language].sleepingFalling, language })}
-	  </View>
-	  <View style={styles.responseRow}>
-		{radioButtons({ field: sleepingWalking, action: setSleepingWalking, prompt: LocalizedStrings[language].sleepingWalking, language })}
-	  </View>
-	  <View style={styles.responseRow}>
-		{radioButtons({ field: restless, action: setRestless, prompt: LocalizedStrings[language].restless, language })}
-	  </View>
-	  <View style={styles.responseRow}>
-		{radioButtons({ field: difficultyStoppingWorrying, action: setDifficultyStoppingWorrying, prompt: LocalizedStrings[language].difficultyStoppingWorrying, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: bodyAches, action: setBodyAches, prompt: LocalizedStrings[language].bodyAches, language })}
-	  </View>
-				<View style={[styles.responseRow, { padding: 0 }]}>
-		<TextInput
-		  style={styles.inputs}
-						placeholder={LocalizedStrings[language].bodyAchesWhere}
-		  onChangeText={(text) => setBodyAchesWhere(text)}
-		  value={bodyAchesWhere}
-		/>
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: lowEnergy, action: setLowEnergy, prompt: LocalizedStrings[language].lowEnergy, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: noInterest, action: setNoInterest, prompt: LocalizedStrings[language].noInterest, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: guilt, action: setGuilt, prompt: LocalizedStrings[language].guilt, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: hopeless, action: setHopeless, prompt: LocalizedStrings[language].hopeless, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: flashbacks, action: setFlashbacks, prompt: LocalizedStrings[language].flashbacks, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: hypervigilance, action: setHypervigilance, prompt: LocalizedStrings[language].hypervigilance, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: sadIrritable, action: setSadIrritable, prompt: LocalizedStrings[language].sadIrritable, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: hallucinations, action: setHallucinations, prompt: LocalizedStrings[language].hallucinations, language })}
-	  </View>
-				<View style={[styles.responseRow, { padding: 0 }]}>
-		<TextInput
-		  style={styles.inputs}
-						placeholder={LocalizedStrings[language].potentialDiagnosis}
-		  onChangeText={(text) => setPotentialDiagnosis(text)}
-		  value={potentialDiagnosis}
-		/>
-	  </View>
-				<View style={[styles.responseRow, { padding: 0 }]}>
-		<TextInput
-		  style={styles.inputs}
-						placeholder={LocalizedStrings[language].otherSymptom}
-		  onChangeText={(text) => setOtherSymptom(text)}
-		  value={otherSymptom}
-		/>
-	  </View>
-				<Text style={{ fontSize: 16, fontWeight: 'bold' }}>{LocalizedStrings[language].childrenSpecific}:</Text>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: bedWetting, action: setBedWetting, prompt: LocalizedStrings[language].bedWetting, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: defiant, action: setDefiant, prompt: LocalizedStrings[language].defiant, language })}
-	  </View>
-				<View style={styles.responseRow}>
-		{radioButtons({ field: separationAnxiety, action: setSeparationAnxiety, prompt: LocalizedStrings[language].separationAnxiety, language })}
-	  </View>
-				<View style={[styles.responseRow, { padding: 0 }]}>
-		<TextInput
-		  style={styles.inputs}
-						placeholder={LocalizedStrings[language].communicationDifficulties}
-		  onChangeText={(text) => setCommunicationDifficulties(text)}
-		  value={communicationDifficulties}
-		/>
-	  </View>
-	  <View style={{ alignItems: 'center' }}>
-		<Button
-		  title={LocalizedStrings[language].save}
-		  color={'#F77824'}
-		  onPress={() => submitCommonProblems()} />
-	  </View>
-	</View>
-  </ScrollView>
+		<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+		<View style={styles.containerLeft}>
+			{Header({ action: () => props.navigation.navigate('NewVisit', { language }), language, setLanguage })}
+			<View style={{ flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch', }}>
+				<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].commonProblems}</Text>
+			</View>
+			<Text style={[styles.text, { fontSize: 16}]}>{LocalizedStrings[language].commomProblemsDesc}</Text>
+			<Text style={[styles.text]}>{LocalizedStrings[language].commonProblemsHint}</Text>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: difficultyEating, action: setDifficultyEating, prompt: LocalizedStrings[language].difficultyEating, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: suicidalIdeation, action: setSuicidalIdeation, prompt: LocalizedStrings[language].suicidalIdeation, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: difficultySleeping, action: setDifficultySleeping, prompt: LocalizedStrings[language].difficultySleeping, language })}
+			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].hoursSlept}</Text>
+			</View>
+			<View style={[styles.responseRow, { padding: 0 }]}>
+				<TextInput
+						style={styles.inputs}
+						placeholder={LocalizedStrings[language].hoursSlept}
+						onChangeText={(text) => setHoursSlept(text)}
+						value={hoursSlept}
+						keyboardType='numeric'
+				/>
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: sleepingNight, action: setSleepingNight, prompt: LocalizedStrings[language].sleepingNight, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: sleepingFalling, action: setSleepingFalling, prompt: LocalizedStrings[language].sleepingFalling, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: sleepingWalking, action: setSleepingWalking, prompt: LocalizedStrings[language].sleepingWalking, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: restless, action: setRestless, prompt: LocalizedStrings[language].restless, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: difficultyStoppingWorrying, action: setDifficultyStoppingWorrying, prompt: LocalizedStrings[language].difficultyStoppingWorrying, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: bodyAches, action: setBodyAches, prompt: LocalizedStrings[language].bodyAches, language })}
+			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].bodyAchesWhere}</Text>
+			</View>
+			<View style={[styles.responseRow, { padding: 0 }]}>
+				<TextInput
+					style={styles.inputs}
+					placeholder={LocalizedStrings[language].bodyAchesWhere}
+					onChangeText={(text) => setBodyAchesWhere(text)}
+					value={bodyAchesWhere}
+				/>
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: lowEnergy, action: setLowEnergy, prompt: LocalizedStrings[language].lowEnergy, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: noInterest, action: setNoInterest, prompt: LocalizedStrings[language].noInterest, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: guilt, action: setGuilt, prompt: LocalizedStrings[language].guilt, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: hopeless, action: setHopeless, prompt: LocalizedStrings[language].hopeless, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: flashbacks, action: setFlashbacks, prompt: LocalizedStrings[language].flashbacks, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: hypervigilance, action: setHypervigilance, prompt: LocalizedStrings[language].hypervigilance, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: sadIrritable, action: setSadIrritable, prompt: LocalizedStrings[language].sadIrritable, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: hallucinations, action: setHallucinations, prompt: LocalizedStrings[language].hallucinations, language })}
+			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].potentialDiagnosis}</Text>
+			</View>
+			<View style={[styles.responseRow, { padding: 0 }]}>
+				<TextInput
+					style={styles.inputs}
+					placeholder={LocalizedStrings[language].potentialDiagnosis}
+					onChangeText={(text) => setPotentialDiagnosis(text)}
+					value={potentialDiagnosis}
+				/>
+			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].otherSymptom}</Text>
+			</View>
+			<View style={[styles.responseRow, { padding: 0 }]}>
+				<TextInput
+					style={styles.inputs}
+					placeholder={LocalizedStrings[language].otherSymptom}
+					onChangeText={(text) => setOtherSymptom(text)}
+					value={otherSymptom}
+				/>
+			</View>
+			<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].childrenSpecific}:</Text>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: bedWetting, action: setBedWetting, prompt: LocalizedStrings[language].bedWetting, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: defiant, action: setDefiant, prompt: LocalizedStrings[language].defiant, language })}
+			</View>
+			<View style={styles.responseRow}>
+				{radioButtons({ field: separationAnxiety, action: setSeparationAnxiety, prompt: LocalizedStrings[language].separationAnxiety, language })}
+			</View>
+			<View style={[styles.responseRow, { paddingVertical: 0 }]}>
+				<Text style={{ color: '#FFFFFF' }}>{LocalizedStrings[language].communicationDifficulties}</Text>
+			</View>
+			<View style={[styles.responseRow, { padding: 0 }]}>
+				<TextInput
+					style={styles.inputs}
+					placeholder={LocalizedStrings[language].communicationDifficulties}
+					onChangeText={(text) => setCommunicationDifficulties(text)}
+					value={communicationDifficulties}
+				/>
+			</View>
+			<View style={{ alignItems: 'center' }}>
+				<Button
+					title={LocalizedStrings[language].save}
+					color={'#F77824'}
+					onPress={() => submitCommonProblems()} />
+			</View>
+		</View>
+	</ScrollView>
   );
 };
 
