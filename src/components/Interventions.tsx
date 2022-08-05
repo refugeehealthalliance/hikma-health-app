@@ -47,7 +47,7 @@ const Interventions = (props) => {
     const [activeListening, setActiveListening] = useState(null);
     const [psychoeducation, setPsychoeducation] = useState(null);
     const [sleepHygiene, setSleepHygiene] = useState(null);
-    const [safeSpaceImagine, setSafeSpaceImagine] = useState('');
+    const [safeSpaceImagine, setSafeSpaceImagine] = useState(null);
     const [muscleRelaxation, setMuscleRelaxation] = useState(null);
     const [behavioralActivation, setBehavioralActivation] = useState(null);
     const [griefLetter, setGriefLetter] = useState(null);
@@ -180,7 +180,7 @@ const Interventions = (props) => {
 					<View style={styles.responseRow}>
             {radioButtons({ field: prayer, action: setPrayer, prompt: LocalizedStrings[language].prayer, language })}
           </View>
-					<Text style={{ fontSize: 16, fontWeight: 'bold' }}>{LocalizedStrings[language].notes}</Text>
+					<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].notes}</Text>
 					<View style={[styles.responseRow, { padding: 0 }]}>
             <TextInput
               style={styles.inputs}
