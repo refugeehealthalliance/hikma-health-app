@@ -37,7 +37,7 @@ const Examination = (props) => {
   const [traumaThreats, setTraumaThreats] = useState(null);
   const [traumaTJ, setTraumaTJ] = useState(null);
   const [traumaOthers, setTraumaOthers] = useState(null);
-  const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
+  const [language, setLanguage] = useState(props.navigation.getParam('language', 'sp'));
 
   const patientId = props.navigation.getParam('patientId');
   const visitId = props.navigation.getParam('visitId');

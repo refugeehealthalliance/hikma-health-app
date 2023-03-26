@@ -4,18 +4,23 @@ import { database } from "../storage/Database";
 import styles from './Style';
 import { LocalizedStrings } from '../enums/LocalizedStrings'
 import { EventTypes } from "../enums/EventTypes";
+import { Covid19Display } from "./Covid19Form";
+import { VitalsDisplay } from "./Vitals";
+import { ExaminationDisplay } from "./Examination";
 import { MedicineDisplay } from "./Medicine";
 import { MedicalHistoryDisplay } from "./MedicalHistory";
-import { ExaminationDisplay } from "./Examination";
-import { MentalHealthDisplay } from "./MentalHealth";
-import { InterventionsDisplay } from "./Interventions";
+import { PhysiotherapyDisplay } from "./Physiotherapy";
 import { CommonProblemsDisplay } from "./CommonProblems";
-import Header from "./shared/Header";
+import { InterventionsDisplay } from "./Interventions";
+import { MentalHealthDisplay } from "./MentalHealth";
+import { NursingNotesDisplay } from "./NursingNotes";
+import { LabDisplay } from "./Lab";
+
 
 const SnapshotList = (props) => {
   const patient = props.navigation.getParam('patient');
   const eventType = props.navigation.getParam('eventType');
-  const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
+  const [language, setLanguage] = useState(props.navigation.getParam('language', 'sp'));
 
   const [list, setList] = useState(props.navigation.getParam('events', []));
 
@@ -45,9 +50,13 @@ const SnapshotList = (props) => {
     let eventTypeText: string
     let display
     switch (item.event_type) {
-      case EventTypes.MedicalHistoryFull:
-        eventTypeText = LocalizedStrings[language].medicalHistory
-        display = MedicalHistoryDisplay(metadataObj, language)
+      case EventTypes.Covid19Screening:
+        eventTypeText = LocalizedStrings[language].covidScreening
+        display = Covid19Display(metadataObj, language)
+        break
+      case EventTypes.Vitals:
+        eventTypeText = LocalizedStrings[language].vitals
+        display = VitalsDisplay(metadataObj, language)
         break
       case EventTypes.ExaminationFull:
         eventTypeText = LocalizedStrings[language].examination
@@ -57,9 +66,13 @@ const SnapshotList = (props) => {
         eventTypeText = LocalizedStrings[language].medicine
         display = MedicineDisplay(metadataObj, language)
         break
-      case EventTypes.Complaint:
-        eventTypeText = LocalizedStrings[language].complaint
-        display = <Text>{metadataObj}</Text>
+      case EventTypes.MedicalHistoryFull:
+        eventTypeText = LocalizedStrings[language].medicalHistory
+        display = MedicalHistoryDisplay(metadataObj, language)
+        break
+      case EventTypes.Physiotherapy:
+        eventTypeText = LocalizedStrings[language].physiotherapy
+        display = PhysiotherapyDisplay(metadataObj, language)
         break
       case EventTypes.CommonProblems:
         eventTypeText = LocalizedStrings[language].commonProblems
@@ -72,6 +85,14 @@ const SnapshotList = (props) => {
       case EventTypes.MentalHealth:
         eventTypeText = LocalizedStrings[language].mentalHealthFollowUp
         display = MentalHealthDisplay(metadataObj, language)
+        break
+      case EventTypes.NursingNotes:
+        eventTypeText = LocalizedStrings[language].nursingNotes
+        display = NursingNotesDisplay(metadataObj, language)
+        break
+      case EventTypes.Lab:
+        eventTypeText = LocalizedStrings[language].bloodTestImaging
+        display = LabDisplay(metadataObj, language)
         break
       default:
         eventTypeText = item.event_type

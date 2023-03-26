@@ -30,6 +30,10 @@ import Interventions from '../components/Interventions';
 import EditInterventions from '../components/EditInterventions';
 import MentalHealth from '../components/MentalHealth';
 import EditMentalHealth from '../components/EditMentalHealth';
+import NursingNotes from '../components/NursingNotes';
+import EditNursingNotes from '../components/EditNursingNotes';
+import Lab from '../components/Lab';
+import EditLab from '../components/EditLab';
 
 const rootNavigator = createStackNavigator(
   {
@@ -205,6 +209,34 @@ const rootNavigator = createStackNavigator(
       screen: EditMentalHealth,
       navigationOptions: () => ({
         title: `EditMentalHealth`,
+        header: null
+      })
+    },
+    NursingNotes: {
+      screen: NursingNotes,
+      navigationOptions: () => ({
+        title: `NursingNotes`,
+        header: null
+      })
+    },
+    EditNursingNotes: {
+      screen: EditNursingNotes,
+      navigationOptions: () => ({
+        title: `EditNursingNotes`,
+        header: null
+      })
+    },
+    Lab: {
+      screen: Lab,
+      navigationOptions: () => ({
+        title: `Lab`,
+        header: null
+      })
+    },
+    EditLab: {
+      screen: EditLab,
+      navigationOptions: () => ({
+        title: `EditLab`,
         header: null
       })
     },

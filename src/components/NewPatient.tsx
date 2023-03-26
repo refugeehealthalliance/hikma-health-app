@@ -10,11 +10,29 @@ import { LocalizedStrings } from '../enums/LocalizedStrings';
 import { EventTypes } from '../enums/EventTypes';
 import Header from './shared/Header';
 
+export const Gender = (value, action, language) => {
+  return (
+    <Picker
+      selectedValue={value}
+      onValueChange={value => action(value)}
+      style={[styles.picker, { width: 180 }]}
+    >
+      <Picker.Item value={LocalizedStrings[language].male} label={LocalizedStrings[language].male} />
+      <Picker.Item value={LocalizedStrings[language].female} label={LocalizedStrings[language].female} />
+      <Picker.Item value={LocalizedStrings[language].nonBinary} label={LocalizedStrings[language].nonBinary} />
+      <Picker.Item value={LocalizedStrings[language].transGender} label={LocalizedStrings[language].transGender} />
+      <Picker.Item value={LocalizedStrings[language].preferNotRespond} label={LocalizedStrings[language].preferNotRespond} />
+    </Picker>
+  )
+}
+
 const NewPatient = (props) => {
   const [givenName, setGivenName] = useState('');
   const [surname, setSurname] = useState('');
   const [dob, setDob] = useState('');
-  const [male, setMale] = useState(false);
+  // const [male, setMale] = useState(false);
+  const [gender, setGender] = useState('');
+  const [number, setNumber] = useState(Math.random().toString().substr(2, 6));
   const [country, setCountry] = useState('');
   const [hometown, setHometown] = useState('');
   const [phone, setPhone] = useState('');
@@ -48,7 +66,8 @@ const NewPatient = (props) => {
       country: countryId,
       hometown: hometownId,
       phone: phone,
-      sex: male ? 'M' : 'F',
+      sex: gender,
+      number: number
     }).then(() => {
       if (!!camp) {
         handleSaveCamp(camp)
@@ -60,15 +79,15 @@ const NewPatient = (props) => {
     })
   };
 
-  function RadioButton(props) {
-    return (
-      <TouchableOpacity onPress={() => setMale(!male)}>
-        <View style={styles.outerRadioButton}>
-          {props.selected ? <View style={styles.selectedRadioButton} /> : null}
-        </View>
-      </TouchableOpacity>
-    );
-  }
+  // function RadioButton(props) {
+  //   return (
+  //     <TouchableOpacity onPress={() => setMale(!male)}>
+  //       <View style={styles.outerRadioButton}>
+  //         {props.selected ? <View style={styles.selectedRadioButton} /> : null}
+  //       </View>
+  //     </TouchableOpacity>
+  //   );
+  // }
 
   return (
     <View style={styles.container}>
@@ -87,6 +106,17 @@ const NewPatient = (props) => {
           placeholder={LocalizedStrings[language].surname}
           onChangeText={(text) => setSurname(text)}
           value={surname}
+        />
+      </View>
+      <View style={styles.inputRow}>
+        <View style={[styles.responseRow]}>
+          <Text style={{ color: '#FFFFFF', fontWeight: 'bold' }}>MRN: </Text>
+        </View>
+        <TextInput
+          style={styles.inputs}
+          placeholder="MRN"
+          onChangeText={(text) => setNumber(text)}
+          value={number}
         />
       </View>
       <View style={styles.inputRow}>
@@ -109,13 +139,7 @@ const NewPatient = (props) => {
           androidMode='spinner'
           onDateChange={(date) => setDob(date)}
         />
-        <View >
-          <Text style={[{ color: '#FFFFFF' }]}>{LocalizedStrings[language].gender}</Text>
-          <View style={[{ flexDirection: 'row' }]}>
-            {RadioButton({ selected: male })}<Text style={[{ color: '#FFFFFF', paddingHorizontal: 5 }]}>M</Text>
-            {RadioButton({ selected: !male })}<Text style={[{ color: '#FFFFFF', paddingHorizontal: 5 }]}>F</Text>
-          </View>
-        </View>
+        {Gender(gender, setGender, language)}
       </View>
       <View style={styles.inputRow}>
         <TextInput

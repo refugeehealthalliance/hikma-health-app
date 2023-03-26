@@ -133,11 +133,17 @@ const NewVisit = (props) => {
       </View>
 
       <View style={styles.gridContainer}>
-        <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('Examination', { patientId: patient.id, visitId, userName, language })}>
+        {/* <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('Examination', { patientId: patient.id, visitId, userName, language })}>
           <View style={styles.actionIcon}>
             <Image source={require('../images/stethoscope.png')} style={{ width: 43, height: 47 }} />
           </View>
           <Text style={styles.actionText}>{LocalizedStrings[language].examination}</Text>
+        </TouchableOpacity> */}
+        <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('Lab', { patientId: patient.id, visitId, userName, language })}>
+          <View style={styles.actionIcon}>
+            <Image source={require('../images/covid.png')} style={{ width: 40, height: 48 }} />
+          </View>
+          <Text style={styles.actionText}>{LocalizedStrings[language].bloodTestImaging}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('Medicine', { patientId: patient.id, visitId, userName, language })}>
           <View style={styles.actionIcon}>
@@ -180,17 +186,11 @@ const NewVisit = (props) => {
           </View>
           <Text style={styles.actionText}>{LocalizedStrings[language].dentalTreatment}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton} onPress={() => openTextEvent(EventTypes.Notes)}>
+        <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('NursingNotes', { patientId: patient.id, visitId, userName, language })}>
           <View style={styles.actionIcon}>
-            <Image source={require('../images/notes.png')} style={{ width: 43, height: 47 }} />
+            <Image source={require('../images/notes.png')} style={{ width: 40, height: 48 }} />
           </View>
-          <Text style={styles.actionText}>{LocalizedStrings[language].notes}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.actionButton} onPress={() => props.navigation.navigate('Covid19Form', { language, patient, visitId, userName })}>
-          <View style={styles.actionIcon}>
-            <Image source={require('../images/covid.png')} style={{ width: 43, height: 47 }} />
-          </View>
-          <Text style={styles.actionText}>{LocalizedStrings[language].covidScreening}</Text>
+          <Text style={styles.actionText}>{LocalizedStrings[language].nursingNotes}</Text>
         </TouchableOpacity>
       </View>
     </View>

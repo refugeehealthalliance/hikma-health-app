@@ -14,6 +14,8 @@ import { PhysiotherapyDisplay } from "./Physiotherapy";
 import { CommonProblemsDisplay } from "./CommonProblems";
 import { InterventionsDisplay } from "./Interventions";
 import { MentalHealthDisplay } from "./MentalHealth";
+import { NursingNotesDisplay } from "./NursingNotes";
+import { LabDisplay } from "./Lab";
 
 import Header from "./shared/Header";
 
@@ -23,7 +25,7 @@ const EventList = (props) => {
   const userName = props.navigation.getParam('userName');
 
   const [list, setList] = useState(props.navigation.getParam('events', []));
-  const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
+  const [language, setLanguage] = useState(props.navigation.getParam('language', 'sp'));
 
   useEffect(() => {
     database.getEvents(visit.id).then(events => {
@@ -59,6 +61,21 @@ const EventList = (props) => {
       case EventTypes.Physiotherapy:
         props.navigation.navigate('EditPhysiotherapy', { event, language, userName })
         break
+      case EventTypes.CommonProblems:
+        props.navigation.navigate('EditCommonProblems', { event, language, userName })
+        break
+      case EventTypes.Interventions:
+        props.navigation.navigate('EditInterventions', { event, language, userName })
+        break
+      case EventTypes.MentalHealth:
+        props.navigation.navigate('EditMentalHealth', { event, language, userName })
+        break
+      case EventTypes.NursingNotes:
+        props.navigation.navigate('EditNursingNotes', { event, language, userName })
+        break
+      case EventTypes.Lab:
+        props.navigation.navigate('EditLab', { event, language, userName })
+        break
       case EventTypes.Complaint:
       case EventTypes.DentalTreatment:
       case EventTypes.Notes:
@@ -81,7 +98,7 @@ const EventList = (props) => {
         break
       case EventTypes.Vitals:
         eventTypeText = LocalizedStrings[language].vitals
-        display = VitalsDisplay(metadataObj)
+        display = VitalsDisplay(metadataObj, language)
         break
       case EventTypes.ExaminationFull:
         eventTypeText = LocalizedStrings[language].examination
@@ -100,7 +117,7 @@ const EventList = (props) => {
         display = PhysiotherapyDisplay(metadataObj, language)
         break
       case EventTypes.CommonProblems:
-        eventTypeText = LocalizedStrings[language].commomProblems
+        eventTypeText = LocalizedStrings[language].commonProblems
         display = CommonProblemsDisplay(metadataObj, language)
         break
       case EventTypes.Interventions:
@@ -110,6 +127,14 @@ const EventList = (props) => {
       case EventTypes.MentalHealth:
         eventTypeText = LocalizedStrings[language].mentalHealthFollowUp
         display = MentalHealthDisplay(metadataObj, language)
+        break
+      case EventTypes.NursingNotes:
+        eventTypeText = LocalizedStrings[language].nursingNotes
+        display = NursingNotesDisplay(metadataObj, language)
+        break
+      case EventTypes.Lab:
+        eventTypeText = LocalizedStrings[language].bloodTestImaging
+        display = LabDisplay(metadataObj, language)
         break
 
       default:

@@ -1,3 +1,4 @@
+
 export enum EventTypes {
   PatientSummary = 'Patient Summary',
   Camp = 'Camp',
@@ -21,4 +22,6 @@ export enum EventTypes {
   CommonProblems = "Common Problems",
   Interventions = "Interventions Used",
   MentalHealth = "Mental Health",
+  NursingNotes = "Nursing Notes",
+  Lab = "Blood Test/Labs",
 }

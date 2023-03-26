@@ -20,7 +20,7 @@ export interface Database {
   getClinics(): Promise<Clinic[]>;
   getPatientCount(): Promise<number>
   getPatients(): Promise<Patient[]>;
-  searchPatients(givenName: string, surname: string, country: string, hometown: string, camp: string, phone: string, minYear: number, maxYear: number): Promise<Patient[]>
+  searchPatients(givenName: string, surname: string, country: string, hometown: string, camp: string, phone: string, number: string, minYear: number, maxYear: number): Promise<Patient[]>
   getPatient(patient_id: string): Promise<Patient>;
   editStringContent(stringContent: StringContent[], id: string): Promise<string>;
   saveStringContent(stringContent: StringContent[], id?: string): Promise<string>;
@@ -142,7 +142,7 @@ class DatabaseImpl implements Database {
     const id = patient.id.replace(/-/g, "")
     return this.getDatabase()
       .then(db =>
-        db.executeSql(`INSERT INTO patients (id, given_name, surname, date_of_birth, country, hometown, phone, sex, image_timestamp, edited_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [id, patient.given_name, patient.surname, patient.date_of_birth, patient.country, patient.hometown, patient.phone, patient.sex, null, date])
+        db.executeSql(`INSERT INTO patients (id, given_name, surname, date_of_birth, country, hometown, phone, sex, number, image_timestamp, edited_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`, [id, patient.given_name, patient.surname, patient.date_of_birth, patient.country, patient.hometown, patient.phone, patient.sex, patient.number, null, date])
       )
       .then(([results]) => {
         console.log(
@@ -155,7 +155,7 @@ class DatabaseImpl implements Database {
     const date = new Date().toISOString();
     return this.getDatabase()
       .then(db =>
-        db.executeSql(`UPDATE patients SET given_name = ?, surname = ?, date_of_birth = ?, country = ?, hometown = ?, phone = ?, sex = ?, image_timestamp = ?, edited_at = ? WHERE id = ?`, [patient.given_name, patient.surname, patient.date_of_birth, patient.country, patient.hometown, patient.phone, patient.sex, null, date, patient.id])
+        db.executeSql(`UPDATE patients SET given_name = ?, surname = ?, date_of_birth = ?, country = ?, hometown = ?, phone = ?, sex = ?, number = ?, image_timestamp = ?, edited_at = ? WHERE id = ?`, [patient.given_name, patient.surname, patient.date_of_birth, patient.country, patient.hometown, patient.phone, patient.sex, patient.number, null, date, patient.id])
       )
       .then(async ([results]) => {
         return this.getPatient(patient.id)
@@ -316,7 +316,7 @@ class DatabaseImpl implements Database {
     console.log("[db] Fetching patients from the db...");
     return this.getDatabase()
       .then(db =>
-        db.executeSql("SELECT id, given_name, surname, date_of_birth, country, hometown, sex, phone FROM patients ORDER BY edited_at DESC LIMIT 25;")
+        db.executeSql("SELECT id, given_name, surname, date_of_birth, country, hometown, sex, phone, number FROM patients ORDER BY edited_at DESC LIMIT 25;")
       )
       .then(async ([results]) => {
         if (results === undefined) {
@@ -327,7 +327,7 @@ class DatabaseImpl implements Database {
         for (let i = 0; i < count; i++) {
 
           const row = results.rows.item(i);
-          const { id, given_name, surname, date_of_birth, country, hometown, sex, phone } = row;
+          const { id, given_name, surname, date_of_birth, country, hometown, sex, phone, number } = row;
 
           const camp = await this.getLatestPatientEventByType(id, EventTypes.Camp)
           const givenNameContent = await this.languageStringDataById(given_name)
@@ -335,7 +335,7 @@ class DatabaseImpl implements Database {
           const countryContent = await this.languageStringDataById(country)
           const hometownContent = await this.languageStringDataById(hometown)
           console.log(`[db] Patient name: ${given_name}, id: ${id}`);
-          patients.push({ id, given_name: givenNameContent, surname: surnameContent, date_of_birth, country: countryContent, hometown: hometownContent, sex, phone, camp });
+          patients.push({ id, given_name: givenNameContent, surname: surnameContent, date_of_birth, country: countryContent, hometown: hometownContent, sex, phone, number, camp });
         }
         return patients;
       });
@@ -359,10 +359,10 @@ class DatabaseImpl implements Database {
     return queryTerms
   }
 
-  public searchPatients(givenName: string, surname: string, country: string, hometown: string, camp: string, phone: string, minYear: number, maxYear: number): Promise<Patient[]> {
+  public searchPatients(givenName: string, surname: string, country: string, hometown: string, camp: string, phone: string, number: string, minYear: number, maxYear: number): Promise<Patient[]> {
     let queryTerms = '';
 
-    const queryBase = "SELECT DISTINCT patients.id, patients.given_name, patients.surname, patients.date_of_birth, patients.country, patients.hometown, patients.sex, patients.phone, patients.edited_at FROM patients LEFT JOIN string_content ON patients.given_name = string_content.id OR patients.surname = string_content.id OR patients.country = string_content.id OR patients.hometown = string_content.id LEFT JOIN events ON patients.id = events.patient_id"
+    const queryBase = "SELECT DISTINCT patients.id, patients.given_name, patients.surname, patients.date_of_birth, patients.country, patients.hometown, patients.sex, patients.phone, patients.number, patients.edited_at FROM patients LEFT JOIN string_content ON patients.given_name = string_content.id OR patients.surname = string_content.id OR patients.country = string_content.id OR patients.hometown = string_content.id LEFT JOIN events ON patients.id = events.patient_id"
 
     if (!!givenName) {
       queryTerms += this.fuzzySearch(givenName.trim().toLowerCase())
@@ -408,6 +408,14 @@ class DatabaseImpl implements Database {
       }
     }
 
+    if (!!number) {
+      if (!!queryTerms) {
+        queryTerms += ` INTERSECT ${queryBase} WHERE patients.number LIKE '%${number.trim()}%'`
+      } else {
+        queryTerms += ` WHERE patients.number LIKE '%${number.trim()}%'`
+      }
+    }
+
     if (!!minYear && !!maxYear && minYear.toString().length === 4 && maxYear.toString().length === 4) {
       if (!!queryTerms) {
         queryTerms += ` AND SUBSTR(patients.date_of_birth, 1, 4) BETWEEN '${minYear}' AND '${maxYear}'`
@@ -431,7 +439,7 @@ class DatabaseImpl implements Database {
         for (let i = 0; i < count; i++) {
 
           const row = results.rows.item(i);
-          const { id, given_name, surname, date_of_birth, country, hometown, sex, phone } = row;
+          const { id, given_name, surname, date_of_birth, country, hometown, sex, phone, number } = row;
           const camp = await this.getLatestPatientEventByType(id, EventTypes.Camp)
 
           const givenNameContent = await this.languageStringDataById(given_name)
@@ -439,7 +447,7 @@ class DatabaseImpl implements Database {
           const countryContent = await this.languageStringDataById(country)
           const hometownContent = await this.languageStringDataById(hometown)
           console.log(`[db] Patient name: ${given_name}, id: ${id}`);
-          patients.push({ id, given_name: givenNameContent, surname: surnameContent, date_of_birth, country: countryContent, hometown: hometownContent, sex, phone, camp });
+          patients.push({ id, given_name: givenNameContent, surname: surnameContent, date_of_birth, country: countryContent, hometown: hometownContent, sex, phone, number, camp });
         }
         return patients;
       });
@@ -504,14 +512,14 @@ class DatabaseImpl implements Database {
     console.log("[db] Fetching patients from the db...");
     return this.getDatabase()
       .then(db =>
-        db.executeSql("SELECT id, given_name, surname, date_of_birth, country, hometown, sex, phone FROM patients WHERE id = ?;", [patient_id])
+        db.executeSql("SELECT id, given_name, surname, date_of_birth, country, hometown, sex, number, phone FROM patients WHERE id = ?;", [patient_id])
       )
       .then(async ([results]) => {
         if (results === undefined) {
           return;
         }
         const row = results.rows.item(0);
-        const { id, given_name, surname, date_of_birth, country, hometown, sex, phone } = row;
+        const { id, given_name, surname, date_of_birth, country, hometown, sex, number, phone } = row;
         const camp = await this.getLatestPatientEventByType(id, EventTypes.Camp)
 
         const givenNameContent = await this.languageStringDataById(given_name)
@@ -519,7 +527,7 @@ class DatabaseImpl implements Database {
         const countryContent = await this.languageStringDataById(country)
         const hometownContent = await this.languageStringDataById(hometown)
 
-        const editedPatient: Patient = { id, given_name: givenNameContent, surname: surnameContent, date_of_birth, country: countryContent, hometown: hometownContent, sex, phone, camp };
+        const editedPatient: Patient = { id, given_name: givenNameContent, surname: surnameContent, date_of_birth, country: countryContent, hometown: hometownContent, sex, phone, number, camp };
         console.log(
           `[db] Edited patient with id: "${id}"!`
         );

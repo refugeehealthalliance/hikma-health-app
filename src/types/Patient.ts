@@ -9,6 +9,7 @@ export interface Patient {
   hometown: LanguageString
   sex: string
   phone: string
+  number: string
   camp: string
 }
 
@@ -21,4 +22,5 @@ export interface NewPatient {
   hometown: string
   sex: string
   phone: string
+  number: string
 }

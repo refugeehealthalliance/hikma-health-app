@@ -12,7 +12,7 @@ import Header from './shared/Header';
 const EditInterventions = (props) => {
   const event = props.navigation.getParam('event');
   const userName = props.navigation.getParam('userName');
-  const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
+  const [language, setLanguage] = useState(props.navigation.getParam('language', 'sp'));
   
   const [resourceConnection, setResourceConnection] = useState(null);
   const [resourceConnectionSpecify, setResourceConnectionSpecify] = useState(null);
@@ -102,7 +102,7 @@ const EditInterventions = (props) => {
   return (
 		<ScrollView contentContainerStyle={{ flexGrow: 1 }}>
 			<View style={styles.containerLeft}>
-				{Header({ action: () => props.navigation.navigate('NewVisit', { language }), language, setLanguage })}
+				{Header({ action: () => props.navigation.navigate('EventList', { language }), language, setLanguage })}
 				<View style={{ flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch', }}>
 					<Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].interventions}</Text>
 				</View>

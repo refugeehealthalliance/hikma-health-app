@@ -10,19 +10,19 @@ import { EventTypes } from '../enums/EventTypes';
 import { LocalizedStrings } from '../enums/LocalizedStrings';
 import Header from './shared/Header';
 
-export const VitalsDisplay = (metadataObj) => {
+export const VitalsDisplay = (metadataObj, language) => {
   return (
     <View style={{
       flexDirection: 'row',
       flexWrap: 'wrap',
     }}>
-      <Text style={{ width: '50%' }}>HR: {metadataObj.heartRate} BPM</Text>
+      <Text style={{ width: '50%' }}>{LocalizedStrings[language].pulse}: {metadataObj.heartRate} BPM</Text>
       <Text style={{ width: '50%' }}>BP: {metadataObj.systolic}/{metadataObj.diastolic}</Text>
       <Text style={{ width: '50%' }}>Sats: {metadataObj.sats}%</Text>
       <Text style={{ width: '50%' }}>Temp: {metadataObj.temp} °C</Text>
-      <Text style={{ width: '50%' }}>RR: {metadataObj.respiratoryRate}</Text>
-      <Text style={{ width: '50%' }}>Weight: {metadataObj.weight} kg</Text>
-      <Text style={{ width: '50%' }}>BG: {metadataObj.bloodGlucose}</Text>
+      <Text style={{ width: '50%' }}>{LocalizedStrings[language].respiratoryRate}: {metadataObj.respiratoryRate}</Text>
+      <Text style={{ width: '50%' }}>{LocalizedStrings[language].weight}: {metadataObj.weight} kg</Text>
+      <Text style={{ width: '50%' }}>{LocalizedStrings[language].bloodGlucose}: {metadataObj.bloodGlucose}</Text>
     </View>)
 }
 
@@ -35,7 +35,7 @@ const Vitals = (props) => {
   const [respiratoryRate, setRespiratoryRate] = useState(null);
   const [weight, setWeight] = useState(null);
   const [bloodGlucose, setBloodGlucose] = useState(null);
-  const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
+  const [language, setLanguage] = useState(props.navigation.getParam('language', 'sp'));
 
   const patientId = props.navigation.getParam('patientId');
   const visitId = props.navigation.getParam('visitId');
@@ -68,7 +68,7 @@ const Vitals = (props) => {
       <View style={[styles.inputRow, { marginTop: 30 }]}>
         <TextInput
           style={styles.inputs}
-          placeholder="HR"
+          placeholder={LocalizedStrings[language].pulse}
           onChangeText={(text) => setHeartRate(text)}
           value={heartRate}
           keyboardType='numeric'
@@ -113,7 +113,7 @@ const Vitals = (props) => {
         <Text style={{ color: '#FFFFFF' }}>°C</Text>
         <TextInput
           style={styles.inputs}
-          placeholder="RR"
+          placeholder={LocalizedStrings[language].respiratoryRate}
           onChangeText={(text) => setRespiratoryRate(text)}
           value={respiratoryRate}
           keyboardType='numeric'
@@ -122,7 +122,7 @@ const Vitals = (props) => {
       <View style={styles.inputRow}>
         <TextInput
           style={styles.inputs}
-          placeholder="Weight"
+          placeholder={LocalizedStrings[language].weight}
           onChangeText={(text) => setWeight(text)}
           value={weight}
           keyboardType='numeric'
@@ -130,7 +130,7 @@ const Vitals = (props) => {
         <Text style={{ color: '#FFFFFF' }}>kg</Text>
         <TextInput
           style={styles.inputs}
-          placeholder="BG"
+          placeholder={LocalizedStrings[language].bloodGlucose}
           onChangeText={(text) => setBloodGlucose(text)}
           value={bloodGlucose}
           keyboardType='numeric'

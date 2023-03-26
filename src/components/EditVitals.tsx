@@ -11,7 +11,7 @@ import Header from './shared/Header';
 const EditVitals = (props) => {
   const event = props.navigation.getParam('event');
   const metadata = props.navigation.getParam('event').event_metadata;
-  const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
+  const [language, setLanguage] = useState(props.navigation.getParam('language', 'sp'));
   const [heartRate, setHeartRate] = useState(null);
   const [systolic, setSystolic] = useState(null);
   const [diastolic, setDiastolic] = useState(null);
@@ -55,11 +55,10 @@ const EditVitals = (props) => {
     <View style={styles.container}>
       {Header({ action: () => props.navigation.navigate('EventList', { language }), language, setLanguage })}
       <Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].vitals}</Text>
-
       <View style={[styles.inputRow, { marginTop: 30 }]}>
         <TextInput
           style={styles.inputs}
-          placeholder="HR"
+          placeholder={LocalizedStrings[language].pulse}
           onChangeText={(text) => setHeartRate(text)}
           value={heartRate}
           keyboardType='numeric'
@@ -104,7 +103,7 @@ const EditVitals = (props) => {
         <Text style={{ color: '#FFFFFF' }}>°C</Text>
         <TextInput
           style={styles.inputs}
-          placeholder="RR"
+          placeholder={LocalizedStrings[language].respiratoryRate}
           onChangeText={(text) => setRespiratoryRate(text)}
           value={respiratoryRate}
           keyboardType='numeric'
@@ -113,7 +112,7 @@ const EditVitals = (props) => {
       <View style={styles.inputRow}>
         <TextInput
           style={styles.inputs}
-          placeholder="Weight"
+          placeholder={LocalizedStrings[language].weight}
           onChangeText={(text) => setWeight(text)}
           value={weight}
           keyboardType='numeric'
@@ -121,7 +120,7 @@ const EditVitals = (props) => {
         <Text style={{ color: '#FFFFFF' }}>kg</Text>
         <TextInput
           style={styles.inputs}
-          placeholder="BG"
+          placeholder={LocalizedStrings[language].bloodGlucose}
           onChangeText={(text) => setBloodGlucose(text)}
           value={bloodGlucose}
           keyboardType='numeric'

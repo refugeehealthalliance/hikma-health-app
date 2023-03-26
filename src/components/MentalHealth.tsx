@@ -9,7 +9,6 @@ import { v4 as uuid } from 'uuid';
 import { LocalizedStrings } from '../enums/LocalizedStrings';
 import radioButtons from './shared/RadioButtons'
 import Header from './shared/Header';
-import DatePicker from 'react-native-datepicker';
 
 export const RepeatingPicker = (value, action, language) => {
   return (
@@ -48,11 +47,16 @@ export const StressRange = (value, action, language) => {
       onValueChange={value => action(value)}
       style={[styles.picker, { width: 180 }]}
     >
-      <Picker.Item value='0' label={LocalizedStrings[language].none} />
-      <Picker.Item value='1' label={LocalizedStrings[language].little} />
-      <Picker.Item value='2' label={LocalizedStrings[language].moderately} />
-      <Picker.Item value='3' label={LocalizedStrings[language].goodDeal} />
-			<Picker.Item value='4' label={LocalizedStrings[language].alot} />
+      <Picker.Item value='0 - 1' label=" 0 - 1" />
+      <Picker.Item value='1 - 2' label=" 1 - 2" />
+      <Picker.Item value='2 - 3' label=" 2 - 3" />
+      <Picker.Item value='3 - 4' label=" 3 - 4" />
+			<Picker.Item value='4 - 5' label=" 4 - 5" />
+      <Picker.Item value='5 - 6' label=" 5 - 6" />
+      <Picker.Item value='6 - 7' label=" 6 - 7" />
+      <Picker.Item value='7 - 8' label=" 7 - 8" />
+      <Picker.Item value='8 - 9' label=" 8 - 9" />
+      <Picker.Item value='9 - 10' label=" 9 - 10" />
     </Picker>
   )
 }
@@ -76,8 +80,7 @@ export const feelingPicker = (value, action, language) => {
 export const MentalHealthDisplay = (metadataObj, language) => {
   return (
     <View>
-			<Text style={{ fontSize: 16, fontWeight: 'bold' }}>{LocalizedStrings[language].mentalHealthFollowUp}</Text>
-			{!!metadataObj.inPerson ? <Text>{LocalizedStrings[language].inPerson}: {LocalizedStrings[language].yes}</Text> : null}
+			<Text>{LocalizedStrings[language].inPerson}: {!!metadataObj.inPerson ? LocalizedStrings[language].yes : LocalizedStrings[language].no }</Text>
 			<Text>{LocalizedStrings[language].tele}: {metadataObj.tele}</Text>
 			{!!metadataObj.femaleOnly ? <Text>{LocalizedStrings[language].femaleOnly}: {LocalizedStrings[language].yes}</Text> : null}
 			{!!metadataObj.goClinic ? <Text>{LocalizedStrings[language].goClinic}: {LocalizedStrings[language].yes}</Text> : null}
@@ -97,7 +100,6 @@ export const MentalHealthDisplay = (metadataObj, language) => {
 			<Text>{LocalizedStrings[language].cantSleep}: {metadataObj.cantSleep}</Text>
 			<Text>{LocalizedStrings[language].dontFeelSafeLiving}: {metadataObj.dontFeelSafeLiving}</Text>
 			<Text>{LocalizedStrings[language].secondSectionQuestion}: {metadataObj.howYouFeel}</Text>
-			<Text>{LocalizedStrings[language].thirdSectionQuestion}:</Text>
 			<Text>{LocalizedStrings[language].childBodyFeeling}: {metadataObj.childBodyFeeling}</Text>
 			<Text>{LocalizedStrings[language].childAwayFromPeople}: {metadataObj.childAwayFromPeople}</Text>
 			<Text>{LocalizedStrings[language].childFeelingHappy}: {metadataObj.childFeelingHappy}</Text>
@@ -150,7 +152,7 @@ const MentalHealth = (props) => {
 		const [feelAlone, setFeelAlone] = useState(null);
 		const [pastWeekStress, setPastWeekStress] = useState(null);
   
-    const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
+    const [language, setLanguage] = useState(props.navigation.getParam('language', 'sp'));
     const patientId = props.navigation.getParam('patientId');
     const visitId = props.navigation.getParam('visitId');
     const userName = props.navigation.getParam('userName');
@@ -209,7 +211,7 @@ const MentalHealth = (props) => {
         <View style={styles.containerLeft}>
           {Header({ action: () => props.navigation.navigate('NewVisit', { language }), language, setLanguage })}
           <View style={{ flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch', }}>
-            <Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].MentalHealth}</Text>
+            <Text style={[styles.text, { fontSize: 16, fontWeight: 'bold' }]}>{LocalizedStrings[language].mentalHealthFollowUp}</Text>
           </View>
           <View style={styles.responseRow}>
             {radioButtons({ field: inPerson, action: setInPerson, prompt: LocalizedStrings[language].inPerson, language })}

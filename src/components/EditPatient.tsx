@@ -10,14 +10,33 @@ import { LocalizedStrings } from '../enums/LocalizedStrings';
 import { EventTypes } from '../enums/EventTypes';
 import Header from './shared/Header';
 
+
+export const Gender = (value, action, language) => {
+  return (
+    <Picker
+      selectedValue={value}
+      onValueChange={value => action(value)}
+      style={[styles.picker, { width: 180 }]}
+    >
+      <Picker.Item value={LocalizedStrings[language].male} label={LocalizedStrings[language].male} />
+      <Picker.Item value={LocalizedStrings[language].female} label={LocalizedStrings[language].female} />
+      <Picker.Item value={LocalizedStrings[language].nonBinary} label={LocalizedStrings[language].nonBinary} />
+      <Picker.Item value={LocalizedStrings[language].transGender} label={LocalizedStrings[language].transGender} />
+      <Picker.Item value={LocalizedStrings[language].preferNotRespond} label={LocalizedStrings[language].preferNotRespond} />
+    </Picker>
+  )
+}
+
 const EditPatient = (props) => {
   const patient = props.navigation.getParam('patient');
 
-  const [language, setLanguage] = useState(props.navigation.getParam('language', 'en'));
+  const [language, setLanguage] = useState(props.navigation.getParam('language', 'sp'));
   const [givenNameText, setGivenNameText] = useState(!!props.navigation.state.params.patient.given_name ? props.navigation.state.params.patient.given_name.content[language] : '');
   const [surnameText, setSurnameText] = useState(!!props.navigation.state.params.patient.surname ? props.navigation.state.params.patient.surname.content[language] : '');
   const [dob, setDob] = useState(props.navigation.state.params.patient.date_of_birth == 'None' ? '' : props.navigation.state.params.patient.date_of_birth);
-  const [male, setMale] = useState(props.navigation.state.params.patient.sex === 'M');
+  const [gender, setGender] = useState(props.navigation.state.params.patient.sex || '');
+  const [number, setNumber] = useState(props.navigation.state.params.patient.number || Math.random().toString().substr(2, 6));
+  // const [male, setMale] = useState(props.navigation.state.params.patient.sex === 'M');
   const [countryText, setCountryText] = useState(!!props.navigation.state.params.patient.country ? props.navigation.state.params.patient.country.content[language] : '');
   const [hometownText, setHometownText] = useState(!!props.navigation.state.params.patient.hometown ? props.navigation.state.params.patient.hometown.content[language] : '');
   const [phone, setPhone] = useState(props.navigation.state.params.patient.phone || '');
@@ -88,7 +107,8 @@ const EditPatient = (props) => {
       country: countryId,
       hometown: hometownId,
       phone: phone,
-      sex: male ? 'M' : 'F',
+      sex: gender,
+      number: number
     }).then((updatedPatient) => props.navigation.navigate('PatientView', {
       patient: updatedPatient,
       language: language
@@ -110,15 +130,15 @@ const EditPatient = (props) => {
     })
   }, [])
 
-  function RadioButton(props) {
-    return (
-      <TouchableOpacity onPress={() => setMale(!male)}>
-        <View style={styles.outerRadioButton}>
-          {props.selected ? <View style={styles.selectedRadioButton} /> : null}
-        </View>
-      </TouchableOpacity>
-    );
-  }
+  // function RadioButton(props) {
+  //   return (
+  //     <TouchableOpacity onPress={() => setMale(!male)}>
+  //       <View style={styles.outerRadioButton}>
+  //         {props.selected ? <View style={styles.selectedRadioButton} /> : null}
+  //       </View>
+  //     </TouchableOpacity>
+  //   );
+  // }
 
   return (
     <View style={styles.container}>
@@ -137,6 +157,17 @@ const EditPatient = (props) => {
           placeholder={LocalizedStrings[language].surname}
           onChangeText={setSurnameText}
           value={surnameText}
+        />
+      </View>
+      <View style={styles.inputRow}>
+        <View style={[styles.responseRow]}>
+          <Text style={{ color: '#FFFFFF', fontWeight: 'bold' }}>MRN: </Text>
+        </View>
+        <TextInput
+          style={styles.inputs}
+          placeholder="MRN"
+          onChangeText={(text) => setNumber(text)}
+          value={number}
         />
       </View>
       <View style={styles.inputRow}>
@@ -159,13 +190,7 @@ const EditPatient = (props) => {
           androidMode='spinner'
           onDateChange={(date) => setDob(date)}
         />
-        <View >
-          <Text style={[{ color: '#FFFFFF' }]}>{LocalizedStrings[language].gender}</Text>
-          <View style={[{ flexDirection: 'row' }]}>
-            {RadioButton({ selected: male })}<Text style={[{ color: '#FFFFFF', paddingHorizontal: 5 }]}>M</Text>
-            {RadioButton({ selected: !male })}<Text style={[{ color: '#FFFFFF', paddingHorizontal: 5 }]}>F</Text>
-          </View>
-        </View>
+        {Gender(gender, setGender, language)}
       </View>
       <View style={styles.inputRow}>
         <TextInput

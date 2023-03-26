@@ -116,7 +116,7 @@ const Login = (props) => {
     const clinics: Clinic[] = await database.getClinics();
     if (clinics.length == 0) {
       setSyncModalVisible(true)
-      await databaseSync.performSync(instanceUrl, email, password, 'en')
+      await databaseSync.performSync(instanceUrl, email, password, 'sp')
       const clinicsResponse: Clinic[] = await database.getClinics()
       setSyncModalVisible(false)
       clinicId = clinicsResponse[0].id
